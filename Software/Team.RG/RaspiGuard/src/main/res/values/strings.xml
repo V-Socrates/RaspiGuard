@@ -1,0 +1,137 @@
+<resources>
+
+    <string name="app_name">RASPIGUARD</string>
+
+    <!--  GENERAL VALUES -->
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="Empty" />
+
+
+    <!--  FIRST AUTHENTICATION ACTIVITY -->
+    <string name="auth_editText_username">USERNAME</string>
+    <string name="auth_editText_password">PASSWORD OR PIN CODE</string>
+
+
+    <!--  REGISTER NEW ACCOUNT ACTIVITY -->
+
+    <string name="reg_editText_username">USERNAME</string>
+    <string name="reg_editText_password">PASSWORD</string>
+    <string name="reg_editText_password2">CONFIRM PASSWORD</string>
+    <string name="reg_editText_email">EMAIL ADDRESS</string>
+    <string name="reg_editText_pin">PIN CODE</string>
+
+
+    <!--  MAIN MENU ACTIVITY -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!--  DOOR SENSOR ACTIVITY -->
+
+    <!--  MOISTURE SENSOR ACTIVITY -->
+    <string name="moistureSensor_textView_header">MOISTURE SENSOR</string>
+    <string name="msSpinPositionSave">SpinItemKey</string>
+
+        <!--  PHP URLS -->
+        <string name="mGetAllURL">http://munro.humber.ca/~n01132027/RaspiGuard/ms.php?</string>
+        <string name="mSetAlarmURL">http://munro.humber.ca/~n01132027/RaspiGuard/msAlarm.php?</string>
+        <string name="mGetLogURL">http://munro.humber.ca/~n01132027/RaspiGuard/al.php?</string>
+
+        <!--  TOASTS  -->
+        <string name="mNoSensorsFound">No Moisture Sensors Found For&#160;</string>
+        <string name="mErrorFindingSensors">Unable To Find Sensors For&#160;</string>
+        <string name="mNoDataFound">No Data Found For&#160;</string>
+        <string name="mNoLogFound">No Activity Found For&#160;</string>
+
+    <!--  COMMON SENSOR ACTIVITY -->
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="currentUserKey">username</string>
+
+        <!-- PHP RELATED -->
+        <string name="AND"><![CDATA[&]]></string>
+        <string name="UsernamePHP">username=</string>
+        <string name="SensorNamePHP">sensorname=</string>
+        <string name="LocationPHP">location=</string>
+        <string name="StatusPHP">status=</string>
+        <string name="AlarmStatePHP">alarmstate=</string>
+
+        <!-- XML RELATED -->
+        <string name="spinnerHint">Select Sensor</string>
+        <string name="AlarmStateOn">On</string>
+        <string name="AlarmStateOff">Off</string>
+
+        <!-- JSON RELATED -->
+        <string name="JSONKey">result</string>
+        <string name="jKeySensorName">sensorname</string>
+        <string name="jKeyLocation">location</string>
+        <string name="jKeyStatus">status</string>
+        <string name="jKeyAlarmState">alarmstate</string>
+
+        <!-- LOG RELATED -->
+        <string name="jKeyDateTime">datetime</string>
+        <string name="jKeyActivity">activity</string>
+        <string name="LogEntryDivider">&#160;&#160;-&#160;&#160;</string>
+
+
+    <!--  SETTINGS ACTIVITY -->
+    <string name="settings_textView_header">SETTINGS</string>
+    <string name="settings_textView_AppSettings">APP SETTINGS</string>
+    <string name="settings_textView_ManageSettings">MANAGE SENSORS</string>
+    <string name="settings_textView_ManageAccount">MANAGE ACCOUNT</string>
+
+
+    <!--  APP SETTINGS ACTIVITY -->
+    <string name="Appsettings_textView_header">APP SETTINGS</string>
+
+
+    <!--  APP SETTINGS ACTIVITY -->
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <!--  NAVIGATION NAME -->
+    <string name="nav_home">HOME</string>
+    <string name="nav_appSetting">Manage</string>
+    <string name="nav_log">Logs</string>
+    <!--  Setting Section-->
+    <string name="sett_title">Setting Section</string>
+    <string name="sett_sub">App Setting</string>
+    <string name="sett_sub1">Manage Sensors</string>
+    <string name="sett_sub2">Manage Account</string>
+
+    <!--  Door Sensor Section -->
+    <string name="door_title">Door Sensor</string>
+    <string name="door_table">Room</string>
+    <string name="door_table1">Location</string>
+    <string name="door_table2">Status</string>
+    <string name="door_table3">Alarm</string>
+    <string name="w_toggle">Alarm Toggle</string>
+
+    <!--  Moisture Sensor Section -->
+    <string name="moisture_title">Moisture Sensor</string>
+    <string name="moisture_table">Room</string>
+    <string name="moisture_table1">Location</string>
+    <string name="moisture_table2">Status</string>
+    <string name="moisture_table3">Alarm</string>
+
+    <!-- Manage Sensor -->
+    <string name="man_sen_title">Manage Sensor</string>
+    <string name="man_sen_sub">Add Sensor</string>
+    <string name="man_sen_field">Sensor Name: </string>
+    <string name="man_sen_field1">Sensor Location: </string>
+    <string name="man_sen_radio">Door</string>
+    <string name="man_sen_radio1">Moisture</string>
+    <string name="man_sen_radio2btn">ADD</string>
+    <string name="man_sen_sub2">Remove Sensor</string>
+    <string name="man_sen_delete">Delete</string>
+
+    <!--  Account Manage Section -->
+    <string name="acc_title">Manage Account</string>
+    <string name="acc_current">Current Password</string>
+    <string name="acc_newPass">New password</string>
+    <string name="acc_comFirm">Comfirm password</string>
+    <string name="acc_submit">Submit</string>
+
+
+</resources>

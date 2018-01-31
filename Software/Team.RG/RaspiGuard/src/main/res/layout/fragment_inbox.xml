@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.RG.RaspiGuard.com.RG.InboxFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/bg_top" />
+
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:scaleType="center"
+        app:srcCompat="@drawable/title_support" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/settings_textView_header"
+        android:textColor="@android:color/black"
+        android:textSize="12pt" />
+
+
+    <Button
+        android:id="@+id/button_appSettings"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/login_button"
+        android:text="@string/settings_textView_AppSettings"
+        android:textSize="9pt" />
+
+    <Button
+        android:id="@+id/button_manageSensors"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/button_appSettings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/login_button"
+        android:text="@string/settings_textView_ManageSettings"
+        android:textSize="9pt" />
+
+    <Button
+        android:id="@+id/button_manageAccount"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/button_manageSensors"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/login_button"
+        android:text="@string/settings_textView_ManageAccount"
+        android:textSize="9pt" />
+
+</RelativeLayout>

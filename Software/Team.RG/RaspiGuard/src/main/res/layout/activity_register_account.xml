@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Create New Account"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/editText_username"
+            android:layout_width="229dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_box"
+            android:ems="10"
+            android:hint="@string/reg_editText_username"
+            android:inputType="textPersonName"
+            android:paddingLeft="9dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#FFFFFF"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="229dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_box"
+            android:ems="10"
+            android:hint="@string/reg_editText_password"
+            android:inputType="textPassword"
+            android:paddingLeft="9dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#FFFFFF"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/editText_password2"
+            android:layout_width="229dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_box"
+            android:ems="10"
+            android:hint="@string/reg_editText_password2"
+            android:inputType="textPassword"
+            android:paddingLeft="9dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#FFFFFF"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="229dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_box"
+            android:ems="10"
+            android:hint="@string/reg_editText_email"
+            android:inputType="textPersonName"
+            android:paddingLeft="9dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#FFFFFF"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/editText_pin"
+            android:layout_width="229dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_box"
+            android:ems="10"
+            android:hint="@string/reg_editText_pin"
+            android:inputType="numberPassword"
+            android:paddingLeft="9dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#FFFFFF"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="154dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/register_btn"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+
+    </LinearLayout>
+</LinearLayout>
