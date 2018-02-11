@@ -2,8 +2,7 @@
 ###### `Remote Monitoring System`
 
 ## Techinical Report Template Created (Date: 02/11/2018)
-- [RaspiGuard Technical Report](https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Documentation/RaspiGuard%20Technical%20Report%20(Template).docx)
-- RaspiGuard Technical Report Status: 
+- [RaspiGuard Technical Report Status](https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Documentation/RaspiGuard%20Technical%20Report%20(Template).docx):
   - 2.4 Software Requirement Specifications (Ongoing)
     - 2.4.1 Database (Ongoing)
     - 2.4.2 Mobile Application (Ongoing)
