@@ -11,7 +11,7 @@ RaspiGuard is a home security/surveillance system that is used to monitor a room
 ### Materials\Components Needed 
 Click [Here](https://www.adafruit.com/) To Buy Parts
 
-Component	   |                                Cost
+Components	   |                                Cost
 ------------ |  ---------------------------------------
  Raspberry Pi 3 Model B	 |                     $48.98
  Raspberry Pi Power Adapter	|                  $16.95
@@ -37,3 +37,10 @@ Designing the boards can be quite an annoying process, however, We have designed
 ![Image of the RaspiGuard Board](https://github.com/V-Socrates/RaspiGuard/blob/master/Images/RaspiguardBoard.JPG)
 * To download the RaspiGuard Schematic in Fritzing, please click [HERE](https://github.com/V-Socrates/RaspiGuard/blob/master/Hardware/RaspiGuard%20Schematic.fzz)
 ![Image of the RaspiGuard Board](https://github.com/V-Socrates/RaspiGuard/blob/master/Images/FritzingSchematic.JPG)
+
+### Components Needed For Testing
+
+* Raspberry Pi 
+* Keyboard
+* Monitor
+
