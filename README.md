@@ -11,20 +11,20 @@ RaspiGuard is a home security/surveillance system that is used to monitor a room
 ### Materials\Components Needed 
 Click [Here](https://www.adafruit.com/) To Buy Parts
 
-*Raspberry Pi 3 Model B
-*Raspberry Pi Power Adapter	
-*ADATA Premier 8GB microSDHC UHS-I Class 10	
-*ADATA microReader Ver.3 microSDHC	
-*adafruit PiTFT Plus 480x320 3.5"	
-*adafruit ADS1115	
-*SparkFun Soil Moisture Sensor	
-*Photo Cell (CdS Photoresistor)	
-*Magnetic Contact Switchs	
-*Piezo Buzzer - PS1240	
-*GPIO 2x13pin Ribbon Cable	
-*Male To Male 2x13pin Header	
-*Jumper Wire Cables	
-*Raspbian Stretch with Desktop (OS)	
+* Raspberry Pi 3 Model B
+* Raspberry Pi Power Adapter	
+* ADATA Premier 8GB microSDHC UHS-I Class 10	
+* ADATA microReader Ver.3 microSDHC	
+* adafruit PiTFT Plus 480x320 3.5"	
+* adafruit ADS1115	
+* SparkFun Soil Moisture Sensor	
+* Photo Cell (CdS Photoresistor)	
+* Magnetic Contact Switchs	
+* Piezo Buzzer - PS1240	
+* GPIO 2x13pin Ribbon Cable	
+* Male To Male 2x13pin Header	
+* Jumper Wire Cables	
+* Raspbian Stretch with Desktop (OS)	
 
 ### Boards Needed 
 
