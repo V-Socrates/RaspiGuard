@@ -12,7 +12,7 @@ RaspiGuard is a home security/surveillance system that is used to monitor a room
 Click [Here](https://www.adafruit.com/) To Buy Parts
 
 Component	   |                                Cost
-------------   ---------------------------------------
+------------ |  ---------------------------------------
 * Raspberry Pi 3 Model B	 |                     $48.98
 * Raspberry Pi Power Adapter	|                  $16.95
 * ADATA Premier 8GB microSDHC UHS-I Class 10	|  $8.99
@@ -27,7 +27,7 @@ Component	   |                                Cost
 * Male To Male 2x13pin Header	                |  $1.75
 * Jumper Wire Cables	                        |  $1.95
 * Raspbian Stretch with Desktop (OS)	        |  $0.00
-----------------------------------------------|-------
+                                              |
 * TAX	                                        | $20.65
 * TOTAL	                                      | $179.46
 
