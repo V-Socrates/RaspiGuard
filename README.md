@@ -46,25 +46,27 @@ Designing the boards can be quite an annoying process, however, We have designed
 
 ### Implementing Everything Together / Testing.
 
+![Image of the RaspiGuard Board](https://github.com/V-Socrates/RaspiGuard/blob/master/Images/PCB.JPG)
+
 1.	Build the above circuit using the GPIO pinout found on the PiTFT. The picture above shows a Raspberry Pi Model B which the pinout mirrors. It is recommended to use a ribbon cable to connect the above circuit for testing and easy modifications.
 2.	Place the PiTFT on to the your Raspberry Pi 3 B.
 3.	Download the Jesse Pitft image from adafruit (https://s3.amazonaws.com/adafruit-raspberry-pi/2016-11-08-pitft-35r.zip) and flash the image onto you microSD card. Minimum 8GB.
 4.	Insert your SD card into your Raspberry Pi 3 B and power on your Pi.
 5.	After powering on connect to the internet via Ethernet cable or Wifi.
 6.	Execute the commands below into a terminal window. Default sudo password is raspberry.
-cd ~
-sudo apt-get update
-sudo apt-get install build-essential python-dev python-smbus git
-cd ~
-git clone https://github.com/adafruit/Adafruit_Python_ADS1x15.git
-cd Adafruit_Python_ADS1x15
-sudo python setup.py install
-sudo apt-get install build-essential python-dev python-smbus python-pip
-sudo pip install adafruit-ads1x15
-cd ~/Adafruit_Python_ADS1x15/examples
-wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
+* cd ~
+* sudo apt-get update
+* sudo apt-get install build-essential python-dev python-smbus git
+* cd ~
+* git clone https://github.com/adafruit/Adafruit_Python_ADS1x15.git
+* cd Adafruit_Python_ADS1x15
+* sudo python setup.py install
+* sudo apt-get install build-essential python-dev python-smbus python-pip
+* sudo pip install adafruit-ads1x15
+* cd ~/Adafruit_Python_ADS1x15/examples
+*wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
 
 7.	Execute the RG.py python script using “sudo python RG.py” to start your RaspiGuard unit.
 
-![Image of the RaspiGuard Board](https://github.com/V-Socrates/RaspiGuard/blob/master/Images/PCB.JPG)
+
 
