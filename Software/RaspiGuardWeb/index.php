@@ -168,10 +168,9 @@
 			
 			
 			<?php
-			$servername = "165.227.44.224";
-			$username = "user";
-			$password = "user";
-			$database = "raspiguard";
+
+			include_once 'config.php';
+			
 			define('newline',"<br>\n");
 
 			// Create connection
@@ -343,11 +342,7 @@
 	  
       <!-- Example DataTables Card-->
 	  	<?php
-		$servername = "165.227.44.224";
-		$username = "user";
-		$password = "user";
-		$database = "raspiguard";
-
+		include_once 'config.php';
 
 		// Create connection
 		$conn = mysqli_connect($servername, $username, $password, $database);
@@ -519,11 +514,7 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-charts.js"></script>
 	<?php
-			$servername = "165.227.44.224";
-			$username = "user";
-			$password = "user";
-			$database = "raspiguard";
-
+			include_once 'config.php';
 			// Create connection
 			$conn = mysqli_connect($servername, $username, $password, $database);
 
