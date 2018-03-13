@@ -65,8 +65,12 @@ Designing the boards can be quite an annoying process, however, We have designed
 * sudo pip install adafruit-ads1x15
 * cd ~/Adafruit_Python_ADS1x15/examples
 *wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
-
 7.	Execute the RG.py python script using “sudo python RG.py” to start your RaspiGuard unit.
+
+### Software Assistance
+
+To see the source code of  our website, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/RaspiGuardWeb). 
+To see the configuration file of the website, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/RaspiGuardWeb/config.php).
 
 
 
