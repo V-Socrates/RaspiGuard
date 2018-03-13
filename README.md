@@ -67,10 +67,17 @@ Designing the boards can be quite an annoying process, however, We have designed
 *wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
 7.	Execute the RG.py python script using “sudo python RG.py” to start your RaspiGuard unit.
 
-### Software Assistance
+## Software Build Instruction
 
-To see the source code of  our website, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/RaspiGuardWeb). 
-To see the configuration file of the website, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/RaspiGuardWeb/config.php).
+### RaspiGuard Website Assistance
+
+* To see the source code of our website, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/RaspiGuardWeb). 
+* To see the configuration file of the website, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/RaspiGuardWeb/config.php).
+
+### RaspiGaurd Android App Assistance
+
+* To see the source code of our Android App, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/Team.RG/RaspiGuard). 
+* To see the configuration file of the Android App, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/Team.RG/RaspiGuard/src/main/java/Team/RG/RaspiGuard/SupportClasses/Config.java).
 
 
 
