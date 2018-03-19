@@ -1,4 +1,36 @@
 <!DOCTYPE html>
+
+<?php
+   include("config.php");
+   session_start();
+   
+   $error = "";
+   
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      
+      $myusername = mysqli_real_escape_string($db,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+	  $mypassword = md5($mypassword);
+      
+      $sql = "SELECT id FROM users WHERE username = '$myusername' and password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+         $_SESSION['login_user'] = $myusername;
+         
+         header("location: index.php");
+      }else {
+         $error = "Your username or password is invalid";
+      }
+   }
+?>
 <html lang="en">
 
 <head>
@@ -16,19 +48,19 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark">`
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header">RaspiGuard Login</div>
       <div class="card-body">
-        <form>
+        <form action = "" method = "post">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Username</label>
+            <input class="form-control" id="exampleInputEmail1" name = "username" type="text" aria-describedby="userHelp" placeholder="Enter username">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <input class="form-control" id="exampleInputPassword1" name = "password" type="password" placeholder="Password">
           </div>
           <div class="form-group">
             <div class="form-check">
@@ -36,8 +68,9 @@
                 <input class="form-check-input" type="checkbox"> Remember Password</label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.php">Login</a>
+		  <input class="btn btn-primary btn-block" type = "submit" value = "Submit"/>
         </form>
+		<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
         <div class="text-center">
           <a class="d-block small mt-3" href="register.php">Register an Account</a>
           <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
