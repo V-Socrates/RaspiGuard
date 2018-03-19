@@ -1,3 +1,50 @@
+<?php
+   include("config.php");
+   
+   $error = "";
+   
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      
+      $myusername = mysqli_real_escape_string($db,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+	  $mypassword = md5($mypassword);
+	  $myemail = mysqli_real_escape_string($db,$_POST['email']);
+	  $mypin = mysqli_real_escape_string($db,$_POST['pin']);
+	  $date = date('Y-m-d H:i:s');
+      
+      $sql = "SELECT id FROM users WHERE username = '$myusername' ";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+		  
+		$error = "Error, an account with this username already exists!";
+		  
+
+      }else {
+		  
+         $sql = "INSERT INTO users (username,password,pin,email,created_at,updated_at) VALUES  ('$myusername','$mypassword','$mypin','$myemail','$date','$date') ";
+		 $result = mysqli_query($db,$sql);
+		 
+		 session_start();
+		 $_SESSION['login_user'] = $myusername;
+         
+         header("location: index.php");
+		 
+		 
+		 
+		 
+      }
+   }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,28 +68,20 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">First name</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputLastName">Last name</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
-              </div>
-            </div>
+        <form action = "" method = "post">
+		<div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input class="form-control" id="exampleInputEmail1" name = "email" type="email" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Username</label>
+            <input class="form-control" id="exampleInputEmail1" name = "username" type="text" aria-describedby="emailHelp" placeholder="Enter username">
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+                <input class="form-control" id="exampleInputPassword1" name = "password" type="password" placeholder="Password">
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Confirm password</label>
@@ -54,7 +93,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPin1">Pin</label>
-                <input class="form-control" id="exampleInputPin1" type="password" placeholder="Pin">
+                <input class="form-control" id="exampleInputPin1" name = "pin" type="password" placeholder="Pin">
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Confirm Pin</label>
@@ -62,8 +101,9 @@
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="login.php">Register</a>
+		  <input class="btn btn-primary btn-block" type = "submit" value = "Submit"/>
         </form>
+		<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $error; ?></div>
         <div class="text-center">
           <a class="d-block small mt-3" href="login.php">Login Page</a>
           <a class="d-block small" href="forgot-password.php">Forgot Password?</a>

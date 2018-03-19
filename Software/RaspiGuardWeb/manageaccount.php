@@ -1,3 +1,91 @@
+<?php
+   include('session.php');
+   
+   
+   
+   $passstatus = "";
+   $pinstatus = "";
+   
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+	   
+	   
+	   
+	if (isset($_POST['passSubmit'])) {
+      $myusername = $login_session;
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+	  $mypassword = md5($mypassword);
+	  $newpassword = mysqli_real_escape_string($db,$_POST['newpassword']);
+	  $newpassword = md5($newpassword);
+      
+      $sql = "SELECT id FROM users WHERE username = '$myusername' and password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+         
+         
+		 $sql = "UPDATE users SET password = '$newpassword' WHERE username = '$myusername' ";
+		 $result = mysqli_query($db,$sql);
+		 $passstatus = "Password changed!";
+     
+      }else {
+         $passstatus = "Current password is invalid, try again";
+      }
+	}
+	
+	
+	if (isset($_POST['pinSubmit'])) {
+      $myusername = $login_session;
+      $mypin = mysqli_real_escape_string($db,$_POST['pin']); 
+
+	  $newpin = mysqli_real_escape_string($db,$_POST['newpin']);
+
+      
+      $sql = "SELECT id FROM users WHERE username = '$myusername' and pin = '$mypin'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+         
+         
+		 $sql = "UPDATE users SET pin = '$newpin' WHERE username = '$myusername' ";
+		 $result = mysqli_query($db,$sql);
+		 $pinstatus = "PIN changed!";
+     
+      }else {
+         $pinstatus = "Current PIN is invalid, try again";
+      }
+	}
+	   
+	   
+	   
+     
+      
+      
+	  
+	  
+	  
+	  
+	  
+	  
+   }
+   
+   
+   
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +148,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            <i class="fa fa-fw fa-sign-out"></i>Logout (<?php echo $login_session; ?>)</a>
         </li>
       </ul>
     </div>
@@ -79,25 +167,26 @@
 	  
 	  
 	  
-	  
-        <div class="col-sm-4">
 		
+        <div class="col-sm-4">
           <h2>Change Password</h2>
-		  <form>
+		  
+		<form action = "" method = "post">
 		  <div class="form-group">
 			<label for="exampleInputPassword1">Current Password</label>
-			<input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Current Password">
+			<input type="password" class="form-control input-sm" id="exampleInputPassword1" name = "password" placeholder="Current Password">
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputPassword2">New Password</label>
-			<input type="password" class="form-control" id="exampleInputPassword2" placeholder="New Password">
+			<input type="password" class="form-control" id="exampleInputPassword2" name = "newpassword" placeholder="New Password">
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputPassword3">Confirm Password</label>
 			<input type="password" class="form-control" id="exampleInputPassword3" placeholder="Confirm Password">
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <input type = "submit" class="btn btn-primary" name="passSubmit" value = " Submit "/>
 		</form>
+		<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $passstatus; ?></div>
 		   
         </div>
 		
@@ -106,21 +195,22 @@
 		  <div class="col-sm-2">
 		
           <h2 style="margin-top : 20px;">Change Pin</h2>
-		  <form>
+		  <form action = "" method = "post">
 		  <div class="form-group">
 			<label for="exampleInputPin1">Current Pin</label>
-			<input type="password" class="form-control" id="exampleInputPin1" placeholder="Current Pin">
+			<input type="password" class="form-control" id="exampleInputPin1" name = "pin" placeholder="Current Pin">
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputPin2">New Pin</label>
-			<input type="password" class="form-control" id="exampleInputPin2" placeholder="New Pin">
+			<input type="password" class="form-control" id="exampleInputPin2" name = "newpin" placeholder="New Pin">
 		  </div>
 		  <div class="form-group">
 			<label for="exampleInputPin3">Confirm Pin</label>
 			<input type="password" class="form-control" id="exampleInputPin3" placeholder="Confirm Pin">
 		  </div>
-		  <button type="submit" class="btn btn-primary" style="margin-bottom : 20px;">Submit</button>
+		  <input type = "submit" class="btn btn-primary" name="pinSubmit" value = " Submit "/>
 		</form>
+		<div style = "font-size:11px; color:#cc0000; margin-top:10px"><?php echo $pinstatus; ?></div>
 		  
           
 
@@ -137,6 +227,9 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
+	
+	
+	
 	
 	
 	
@@ -168,7 +261,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="logout.php">Logout</a>
           </div>
         </div>
       </div>
