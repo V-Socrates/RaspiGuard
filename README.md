@@ -5,6 +5,9 @@ Heakeme Williams
 
 # RASPIGUARD Board For Home Monitoring Build Instrutions
 
+### Project website 
+Click [Here](http://165.227.44.224/RaspiGuard/) to get directed
+
 ### Background Knowledge
 RaspiGuard is a home security/surveillance system that is used to monitor a room remotely using our android application. The current operational functionality is door and moisture sensors. We are currently working on the functionality of light sensors as well as various other sensors. Installing a home security system can be costly, but needing one and not having one can cost you more. Fortunately, you will not have that dilemma with RaspiGuard. RaspiGuard is a cost-effective and easy to install security system that you can easily setup and deploy on your own. 
 
