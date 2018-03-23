@@ -13,6 +13,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>RaspiGuard | Home</title>
+  <link rel="icon" href="icons/raspiguard.png">
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -36,6 +37,12 @@
           <a class="nav-link" href="index.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link" href="unitstatus.php">
+            <i class="fa fa-fw fa-desktop"></i>
+            <span class="nav-link-text">Unit Status</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -86,6 +93,7 @@
 	 
 	  
       <!-- Icon Cards - THEY ARE CUTE WIDGETS BUT A BIT TOO TIME CONSUMING TO IMPLEMENT AND NO RETURN ON TIME INVESTMENT
+	  
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
@@ -176,13 +184,13 @@
 
 			include_once 'config.php';
 			
-			define('newline',"<br>\n");
+
 
 			// Create connection
 			$conn = mysqli_connect($servername, $username, $password, $database);
 
 			
-			$sql="select * from activitylog ORDER BY id DESC LIMIT 10"; //NEED TO FIX THIS WITH LOGGED IN USERNAME DATA 
+			$sql="SELECT * FROM activitylog WHERE username='$login_session' ORDER BY id DESC LIMIT 10";  
 
 			$result = mysqli_query($conn, $sql);
 			
@@ -215,6 +223,14 @@
 				}elseif (strcmp($row["activity"], "alarm off") == 0) {
 					
 					echo "<img class='d-flex mr-3 rounded-circle' src='icons/alarm_off.png' alt='icons/raspiguard.png'>" ;
+					
+				}elseif (strcmp($row["activity"], "moisture measurement") == 0) {
+					
+					echo "<img class='d-flex mr-3 rounded-circle' src='icons/moisture.png' alt='icons/raspiguard.png'>" ;
+					
+				}elseif (strcmp($row["activity"], "light measurement") == 0) {
+					
+					echo "<img class='d-flex mr-3 rounded-circle' src='icons/light.png' alt='icons/raspiguard.png'>" ;
 					
 				}else echo "<img class='d-flex mr-3 rounded-circle' src='icons/raspiguard.png' alt=''>" ; 
 				
@@ -250,6 +266,11 @@
 				
 				
 				
+			} else {
+			
+			echo "<div class='media-body'>" ; 
+			echo "Did not find any data for username <b><u>" . $login_session . "</b></u>";
+			echo "</div>" ;
 			}
 			
 			?>
@@ -317,12 +338,21 @@
           </div>
 	  
 	  
-      <!-- Area Chart Example-->
+      <!-- Average Daily Moisture Levels Area Chart -->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Moisture Levels</div>
+          <i class="fa fa-area-chart"></i> Average Daily Moisture Levels</div>
         <div class="card-body">
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
+        </div>
+      </div>
+	  
+	  <!-- Average Daily Light Levels Area Chart-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-area-chart"></i> Average Daily Light Levels</div>
+        <div class="card-body">
+          <canvas id="myAreaChart2" width="100%" height="30"></canvas>
         </div>
       </div>
 	  
@@ -352,7 +382,7 @@
 		// Create connection
 		$conn = mysqli_connect($servername, $username, $password, $database);
 
-		$sql="select * from activitylog"; //NEED TO FIX THIS WITH LOGGED IN USERNAME DATA 
+		$sql="SELECT * FROM activitylog WHERE username='$login_session';";  
 
 		$result = mysqli_query($conn, $sql);
 		
@@ -405,7 +435,7 @@
 		
 		} else {
 			
-			echo "No rows retreived";
+			echo "Did not find any data for username <b><u>" . $login_session . "</b></u>";
 		}
 		
 		
@@ -530,7 +560,7 @@
        SUM(DATE(datetime) BETWEEN '2018-02-01' AND '2018-02-28') AS Feb, 
        SUM(DATE(datetime) BETWEEN '2018-03-01' AND '2018-03-31') AS Mar,
        SUM(DATE(datetime) BETWEEN '2018-04-01' AND '2018-04-30') AS Apr
-		FROM `activitylog`"; //NEED TO FIX THIS WITH LOGGED IN USERNAME DATA 
+		FROM `activitylog` WHERE username='$login_session';"; 
 
 			$result = mysqli_query($conn, $sql);
 			
@@ -556,12 +586,103 @@
 				
 
 				
+			} else {
+			
+			echo "Did not find any data for username <b><u>" . $login_session . "</b></u>";
+			
 			}
 			
 			
 			
 			
-?>
+	?>
+	
+	<?php
+	
+			include_once 'config.php';			
+
+			// Create connection
+			$conn = mysqli_connect($servername, $username, $password, $database);
+			
+			$sql="SELECT (
+	SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-12' AND '2018-03-13' AND activity='moisture measurement' AND username='$login_session') AS d1,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-13' AND '2018-03-14' AND activity='moisture measurement' AND username='$login_session' ) AS d2,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-14' AND '2018-03-15' AND activity='moisture measurement' AND username='$login_session' ) AS d3,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-15' AND '2018-03-16' AND activity='moisture measurement' AND username='$login_session' ) AS d4,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-16' AND '2018-03-17' AND activity='moisture measurement' AND username='$login_session' ) AS d5,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-17' AND '2018-03-18' AND activity='moisture measurement' AND username='$login_session' ) AS d6,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-18' AND '2018-03-19' AND activity='moisture measurement' AND username='$login_session' ) AS d7,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-19' AND '2018-03-20' AND activity='moisture measurement' AND username='$login_session' ) AS d8,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-20' AND '2018-03-21' AND activity='moisture measurement' AND username='$login_session' ) AS d9,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-21' AND '2018-03-22' AND activity='moisture measurement' AND username='$login_session' ) AS d10,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-22' AND '2018-03-23' AND activity='moisture measurement' AND username='$login_session' ) AS d11,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-23' AND '2018-03-24' AND activity='moisture measurement' AND username='$login_session' ) AS d12,
+	(SELECT AVG(moisturelevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-24' AND '2018-03-25' AND activity='moisture measurement' AND username='$login_session' ) AS d13;"; 
+
+			$result = mysqli_query($conn, $sql);
+
+			if (mysqli_num_rows($result) > 0) {
+				
+				echo "<script>" ; 
+				echo "var ctx = document.getElementById('myAreaChart');"  ; 
+				 
+				$row = mysqli_fetch_row($result);
+				 				
+				$areaChartData=sprintf("var myLineChart = new Chart(ctx, {type: 'line',data: {labels: ['Mar 12', 'Mar 13', 'Mar 14', 'Mar 15', 'Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 21', 'Mar 22', 'Mar 23', 'Mar 24'],datasets: [{label: 'Level',lineTension: 0.3,backgroundColor: 'rgba(2,117,216,0.2)',borderColor: 'rgba(2,117,216,1)',pointRadius: 5,pointBackgroundColor: 'rgba(2,117,216,1)',pointBorderColor: 'rgba(255,255,255,0.8)',pointHoverRadius: 5,pointHoverBackgroundColor: 'rgba(2,117,216,1)',pointHitRadius: 20,pointBorderWidth: 2,data: [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s],}],},options: {scales: {xAxes: [{time: {unit: 'date'},gridLines: {display: false},ticks: {maxTicksLimit: 7}}],yAxes: [{ticks: {min: 0,max: 100,maxTicksLimit: 5},gridLines: {color: 'rgba(0, 0, 0, .125)',}}],},legend: {display: false}}});", 
+						   $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[1], $row[12]);
+				   echo $areaChartData;
+
+				echo "</script>" ; 
+				
+	
+			}
+	
+	
+	?>
+	
+	<?php
+	
+			include_once 'config.php';			
+
+			// Create connection
+			$conn = mysqli_connect($servername, $username, $password, $database);
+			
+			$sql="SELECT (
+	SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-12' AND '2018-03-13' AND activity='light measurement' AND username='$login_session') AS d1,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-13' AND '2018-03-14' AND activity='light measurement' AND username='$login_session' ) AS d2,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-14' AND '2018-03-15' AND activity='light measurement' AND username='$login_session' ) AS d3,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-15' AND '2018-03-16' AND activity='light measurement' AND username='$login_session' ) AS d4,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-16' AND '2018-03-17' AND activity='light measurement' AND username='$login_session' ) AS d5,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-17' AND '2018-03-18' AND activity='light measurement' AND username='$login_session' ) AS d6,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-18' AND '2018-03-19' AND activity='light measurement' AND username='$login_session' ) AS d7,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-19' AND '2018-03-20' AND activity='light measurement' AND username='$login_session' ) AS d8,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-20' AND '2018-03-21' AND activity='light measurement' AND username='$login_session' ) AS d9,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-21' AND '2018-03-22' AND activity='light measurement' AND username='$login_session' ) AS d10,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-22' AND '2018-03-23' AND activity='light measurement' AND username='$login_session' ) AS d11,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-23' AND '2018-03-24' AND activity='light measurement' AND username='$login_session' ) AS d12,
+	(SELECT AVG(lightlevel) FROM `activitylog` WHERE datetime BETWEEN '2018-03-24' AND '2018-03-25' AND activity='light measurement' AND username='$login_session' ) AS d13;"; 
+
+			$result = mysqli_query($conn, $sql);
+
+			if (mysqli_num_rows($result) > 0) {
+				
+				echo "<script>" ; 
+				echo "var ctx = document.getElementById('myAreaChart2');"  ; 
+				 
+				$row = mysqli_fetch_row($result);
+				 				
+				$areaChartData=sprintf("var myLineChart = new Chart(ctx, {type: 'line',data: {labels: ['Mar 12', 'Mar 13', 'Mar 14', 'Mar 15', 'Mar 16', 'Mar 17', 'Mar 18', 'Mar 19', 'Mar 20', 'Mar 21', 'Mar 22', 'Mar 23', 'Mar 24'],datasets: [{label: 'Level',lineTension: 0.3,backgroundColor: 'rgba(2,117,216,0.2)',borderColor: 'rgba(2,117,216,1)',pointRadius: 5,pointBackgroundColor: 'rgba(2,117,216,1)',pointBorderColor: 'rgba(255,255,255,0.8)',pointHoverRadius: 5,pointHoverBackgroundColor: 'rgba(2,117,216,1)',pointHitRadius: 20,pointBorderWidth: 2,data: [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s],}],},options: {scales: {xAxes: [{time: {unit: 'date'},gridLines: {display: false},ticks: {maxTicksLimit: 7}}],yAxes: [{ticks: {min: 0,max: 255,maxTicksLimit: 5},gridLines: {color: 'rgba(0, 0, 0, .125)',}}],},legend: {display: false}}});", 
+						   $row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9], $row[10], $row[1], $row[12]);
+				   echo $areaChartData;
+
+				echo "</script>" ; 
+				
+	
+			}
+	
+	
+	?>
+	
   </div>
 </body>
 

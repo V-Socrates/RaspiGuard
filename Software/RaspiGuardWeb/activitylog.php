@@ -12,6 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>RaspiGuard | Activity Log</title>
+  <link rel="icon" href="icons/raspiguard.png">
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -35,6 +36,12 @@
           <a class="nav-link" href="index.php">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link" href="unitstatus.php">
+            <i class="fa fa-fw fa-desktop"></i>
+            <span class="nav-link-text">Unit Status</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -87,7 +94,7 @@
 		// Create connection
 		$conn = mysqli_connect($servername, $username, $password, $database);
 
-		$sql="select * from activitylog"; //NEED TO FIX THIS WITH LOGGED IN USERNAME DATA 
+		$sql="SELECT * FROM activitylog WHERE username='$login_session';";  
 
 		$result = mysqli_query($conn, $sql);
 		
@@ -140,7 +147,7 @@
 		
 		} else {
 			
-			echo "No rows retreived";
+			echo "Did not find any data for username <b><u>" . $login_session . "</b></u>";
 		}
 		
 		

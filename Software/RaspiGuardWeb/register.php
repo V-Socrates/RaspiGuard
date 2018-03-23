@@ -55,6 +55,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>RaspiGuard | Register</title>
+  <link rel="icon" href="icons/raspiguard.png">
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
