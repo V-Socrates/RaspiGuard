@@ -21,6 +21,11 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  
+  
+
+  
+  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -90,6 +95,9 @@
       <!-- Example DataTables Card-->
 	  	<?php
 		include_once 'config.php';
+		
+		
+
 
 		// Create connection
 		$conn = mysqli_connect($servername, $username, $password, $database);
@@ -118,12 +126,24 @@
 			echo "</thead>" ; 
 			echo "<tbody>" ;	
 			
+			$alarmOff = "Turn alarm off";
+			$alarmOn = "Turn alarm on";
+			
+			
 			
 			//table content LOOP BEGINS here
 			while($row = mysqli_fetch_assoc($result))
 			{
-			   $record=sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", 
-					   $row["unitname"], $row["location"], $row["doorstatus"], $row["dooralarmstate"], $row["moisturelevel"], $row["lightlevel"]); 
+				
+				if ($row["dooralarmstate"] <=> "on") { 
+				
+					$alarmMsg = $alarmOn;
+					$alarmUpdate = "off";
+				} else { $alarmMsg = $alarmOff;$alarmUpdate = "on";}
+				
+				
+			   $record=sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s<a class='nav-link' style='display:inline-flex;' href='toggleAlarm.php'><i class='fa fa-fw fa-wrench'></i><span class='nav-link-text'> $alarmMsg</span></a></td><td>%s</td><td>%s</td></tr>\n", 
+					   $row["unitname"], $row["location"], $row["doorstatus"] , $row["dooralarmstate"], $row["moisturelevel"], $row["lightlevel"]); 
 			   echo $record;
 			}
 			
