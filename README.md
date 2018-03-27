@@ -5,13 +5,13 @@ Heakeme Williams
 
 # RASPIGUARD Board For Home Monitoring Build Instrutions
 
-### Project website 
+### Project website
 Click [here](http://165.227.44.224/RaspiGuard/) to get directed
 
 ### Background Knowledge
-RaspiGuard is a home security/surveillance system that is used to monitor a room remotely using our android application. The current operational functionality is door and moisture sensors. We are currently working on the functionality of light sensors as well as various other sensors. Installing a home security system can be costly, but needing one and not having one can cost you more. Fortunately, you will not have that dilemma with RaspiGuard. RaspiGuard is a cost-effective and easy to install security system that you can easily setup and deploy on your own. 
+RaspiGuard is a home security/surveillance system that is used to monitor a room remotely using our android application. The current operational functionality is door and moisture sensors. We are currently working on the functionality of light sensors as well as various other sensors. Installing a home security system can be costly, but needing one and not having one can cost you more. Fortunately, you will not have that dilemma with RaspiGuard. RaspiGuard is a cost-effective and easy to install security system that you can easily setup and deploy on your own.
 
-### Materials\Components Needed 
+### Materials\Components Needed
 Click [Here](https://www.adafruit.com/) To Buy Parts
 
 Components	   |                                Cost
@@ -33,9 +33,9 @@ Raspbian Stretch with Desktop (OS)	        |  $0.00
 TAX	                                        | $20.65
 TOTAL	                                      | $179.46
 
-### Boards Needed 
+### Boards Needed
 
-Designing the boards can be quite an annoying process, however, We have designed these boards and they are available for download if needed. 
+Designing the boards can be quite an annoying process, however, We have designed these boards and they are available for download if needed.
 * To download the RaspiGuard board file in Eagle, please click [HERE](https://github.com/V-Socrates/RaspiGuard/blob/master/Hardware/RaspiGuardProtoBoard.zip)
 ![Image of the RaspiGuard Board](https://github.com/V-Socrates/RaspiGuard/blob/master/Images/RaspiguardBoard.JPG)
 * To download the RaspiGuard Schematic in Fritzing, please click [HERE](https://github.com/V-Socrates/RaspiGuard/blob/master/Hardware/RaspiGuard%20Schematic.fzz)
@@ -43,7 +43,7 @@ Designing the boards can be quite an annoying process, however, We have designed
 
 ### Components Needed For Testing
 
-* Raspberry Pi 
+* Raspberry Pi
 * Keyboard
 * Monitor
 
@@ -64,7 +64,7 @@ Designing the boards can be quite an annoying process, however, We have designed
 * git clone https://github.com/adafruit/Adafruit_Python_ADS1x15.git
 * cd Adafruit_Python_ADS1x15
 * sudo python setup.py install
-* sudo apt-get install build-essential python-dev python-smbus python-pip
+* sudo apt-get install build-essential python-dev python-smbus python-pip python-mysqldb
 * sudo pip install adafruit-ads1x15
 * cd ~/Adafruit_Python_ADS1x15/examples
 *wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
@@ -74,13 +74,10 @@ Designing the boards can be quite an annoying process, however, We have designed
 
 ### RaspiGuard Website Assistance
 
-* To see the source code of our website, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/RaspiGuardWeb). 
+* To see the source code of our website, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/RaspiGuardWeb).
 * To see the configuration file of the website, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/RaspiGuardWeb/config.php).
 
 ### RaspiGaurd Android App Assistance
 
-* To see the source code of our Android App, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/Team.RG/RaspiGuard). 
+* To see the source code of our Android App, please click [here](https://github.com/V-Socrates/RaspiGuard/tree/master/Software/Team.RG/RaspiGuard).
 * To see the configuration file of the Android App, click [here](https://github.com/V-Socrates/RaspiGuard/blob/master/Software/Team.RG/RaspiGuard/src/main/java/Team/RG/RaspiGuard/SupportClasses/Config.java).
-
-
-
