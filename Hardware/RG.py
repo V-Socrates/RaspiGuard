@@ -12,26 +12,23 @@ import webbrowser
 ADS = Adafruit_ADS1x15.ADS1115()
 GAIN = 1
 
-#Counters/Timers
-#doorStat = [0] * 1
-
 #Sensor Data
 formattedData = [0] * 4
 
 #Door Sensor
-doorSensor = 14
+doorSensor = 4
 IO.setmode(IO.BCM)
 IO.setup(doorSensor, IO.IN, pull_up_down = IO.PUD_UP)
 
 #SQL Database Information
-SQL_Server      = "165.227.44.224"
-SQL_User        = "user"
-SQL_Pass        = "user"
-SQL_Database    = "raspiguard"
+SQL_Server      = "Fill In"
+SQL_User        = "Fill In"
+SQL_Pass        = "Fill In"
+SQL_Database    = "Fill In"
 
 #SQL Unit Information
-SQL_Username    = "vivek"
-SQL_Unitname    = "Prototype"
+SQL_Username    = "Fill In"
+SQL_Unitname    = "Fill In"
 
 #####################
 #     FUNCTIONS     #
@@ -65,7 +62,7 @@ def ActivityLog(readings):
 	cursor = db.cursor()
 
 	try:
-		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, %s, %s, %s) """, (curtime, SQL_User, SQL_Unitname, readings[2], readings[1], readings[0]))
+		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, %s, %s, %s) """, (curtime, SQL_Username, SQL_Unitname, readings[2], readings[1], readings[0]))
 		db.commit()
 
 	except:
@@ -73,7 +70,6 @@ def ActivityLog(readings):
 
 	db.close()
 	return
-
 
 #Function To Print Sensor Data
 def PrintSensorReadings():
@@ -90,16 +86,17 @@ def PrintSensorReadings():
 
         #Formatting Light Sensor Data
         if i == 0:
-            formattedData[i] = round(float((rawData[i] / 32767) * 255))
+            formattedData[i] = abs(round(float((rawData[i] / 32767) * 255), 0))
 
         #Formatting Moisture Sensor Data
         if i == 1:
-            formattedData[i] = round(float((rawData[i] / 26500) * 100))
+            formattedData[i] = abs(round(float((rawData[i] / 26500) * 100), 0))
 
+        #Formatting Door Sensor Data
         if IO.input(doorSensor) == True:
             if formattedData[2] != "Open":
-                ActivityLog(formattedData)
                 formattedData[2] = "Open"
+                ActivityLog(formattedData)
 
         if IO.input(doorSensor) == False:
             if formattedData[2] != "Closed":
@@ -109,18 +106,18 @@ def PrintSensorReadings():
     #Printing Formatted
     print("\033[H\033[J")
     print(" ")
-    print("\033[1;31;40m************************************************")
-    print("\033[1;31;40m*\t\t\033[1;32;40m    RaspiGuard    \t\t\033[1;31;40m*")
-    print("\033[1;31;40m*----------------------------------------------*")
-    print("\033[1;31;40m* Lux:  \033[1;32;40m%7.2f\t\t\033[1;31;40mMoisture: \033[1;32;40m%04.2f%%\t\t\033[1;31;40m*" % (formattedData[0], formattedData[1]))
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m* Door:   \033[1;32;40m%s\t\033[1;31;40mAlarm:    \033[1;32;40m%s\t\t\033[1;31;40m*" % (formattedData[2], formattedData[3]))
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m*                                              *")
-    print("\033[1;31;40m************************************************")
+    print("\033[1;31;40m*****************************************")
+    print("\033[1;31;40m*\t\t\033[1;32;40m RaspiGuard \t\t\033[1;31;40m*")
+    print("\033[1;31;40m*---------------------------------------*")
+    print("\033[1;31;40m* Lux: \033[1;32;40m%7.2f\t\t\033[1;31;40mMoisture:\033[1;32;40m%04.2f%%\t\033[1;31;40m*" % (formattedData[0], formattedData[1]))
+    print("\033[1;31;40m*                                       *")
+    print("\033[1;31;40m*                                       *")
+    #print("\033[1;31;40m*                                       *")
+    print("\033[1;31;40m* Door:  \033[1;32;40m%s\t\t\033[1;31;40mAlarm:\t\033[1;32;40m %s\t\033[1;31;40m*" % (formattedData[2], formattedData[3]))
+    print("\033[1;31;40m*                                       *")
+    print("\033[1;31;40m*                                       *")
+    #print("\033[1;31;40m*                                       *")
+    print("\033[1;31;40m*****************************************")
 
 #Get Alarm State
 def GetAlarmStatus():
@@ -132,7 +129,16 @@ def GetAlarmStatus():
 
     cursor.execute(alarm)
     data = cursor.fetchone()
-    formattedData[3] = data[0]
+
+    #Formatting Alarm Status Data
+    if data[0] == "on":
+        formattedData[3] = "On"
+
+    elif data[0] == "off":
+        formattedData[3] = "Off"
+
+    else:
+        formattedData[3] = data[3]
 
     db.close()
     return
@@ -142,7 +148,12 @@ def GetAlarmStatus():
 ################
 def main():
 
-    counter = 0
+    #Timer Variables
+    Update = 0
+    Log = 0
+
+    #I
+    PrintSensorReadings()
 
     #Sensor Loop
     while True:
@@ -151,12 +162,18 @@ def main():
         PrintSensorReadings()
 
         #Update SQL Database Every 3 Seconds
-        if (counter % 6) == 0:
+        if Update  == 6:
             UpdateSQLDatabase(formattedData)
-            counter = 0
+            Update = 0
 
+        #log Sensor Details Every Minute
+        if Log == 30:
+            ActivityLog(formattedData)
+            Log = 0
+
+        Update += 1
+        Log += 1
         time.sleep(0.5)
-        counter += 1
     return
 
 main()
