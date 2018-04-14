@@ -62,7 +62,7 @@ def ActivityLog(readings):
 	cursor = db.cursor()
 
 	try:
-		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, "Door " %s, %s, %s) """, (curtime, SQL_Username, SQL_Unitname, readings[2], readings[1], readings[0]))
+		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, "door " %s, %s, %s) """, (curtime, SQL_Username, SQL_Unitname, readings[2].lower(), readings[1], readings[0]))
 		db.commit()
 
 	except:
@@ -92,16 +92,16 @@ def PrintSensorReadings():
         if i == 1:
             formattedData[i] = abs(round(float((rawData[i] / 26500) * 100), 0))
 
-        #Formatting Door Sensor Data
-        if IO.input(doorSensor) == True:
-            if formattedData[2] != "Opened":
-                formattedData[2] = "Opened"
-                ActivityLog(formattedData)
+    #Formatting Door Sensor Data
+    if IO.input(doorSensor) == True:
+        if formattedData[2] != "Opened":
+            formattedData[2] = "Opened"
+            ActivityLog(formattedData)
 
-        if IO.input(doorSensor) == False:
-            if formattedData[2] != "Closed":
-                formattedData[2] = "Closed"
-                ActivityLog(formattedData)
+    if IO.input(doorSensor) == False:
+        if formattedData[2] != "Closed":
+            formattedData[2] = "Closed"
+            ActivityLog(formattedData)
 
     #Printing Formatted
     print("\033[H\033[J")
@@ -152,9 +152,6 @@ def main():
     Update = 0
     Log = 0
 
-    #I
-    PrintSensorReadings()
-
     #Sensor Loop
     while True:
 
@@ -171,6 +168,7 @@ def main():
             ActivityLog(formattedData)
             Log = 0
 
+        #Updating Timers
         Update += 1
         Log += 1
         time.sleep(0.5)
