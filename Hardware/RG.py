@@ -62,7 +62,7 @@ def ActivityLog(readings):
 	cursor = db.cursor()
 
 	try:
-		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, %s, %s, %s) """, (curtime, SQL_Username, SQL_Unitname, readings[2], readings[1], readings[0]))
+		cursor.execute("""INSERT INTO activitylog (datetime, username, sensorname, activity, moisturelevel, lightlevel) VALUES (%s, %s, %s, "Door " %s, %s, %s) """, (curtime, SQL_Username, SQL_Unitname, readings[2], readings[1], readings[0]))
 		db.commit()
 
 	except:
@@ -94,8 +94,8 @@ def PrintSensorReadings():
 
         #Formatting Door Sensor Data
         if IO.input(doorSensor) == True:
-            if formattedData[2] != "Open":
-                formattedData[2] = "Open"
+            if formattedData[2] != "Opened":
+                formattedData[2] = "Opened"
                 ActivityLog(formattedData)
 
         if IO.input(doorSensor) == False:
