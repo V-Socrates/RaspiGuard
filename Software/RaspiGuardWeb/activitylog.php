@@ -102,7 +102,7 @@
 			
 			echo "<div class='card mb-3'>" ;
 			echo "<div class='card-header'>" ;
-			echo "<i class='fa fa-table'></i> Activity Log</div>" ; 
+			echo "<i class='fa fa-table'></i> Activity Log (of all time)</div>" ; 
 			echo "<div class='card-body'>" ; 
 			echo "<div class='table-responsive'>" ; 
 			echo "<table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>" ; 
@@ -110,14 +110,18 @@
 			echo "<tr>" ; 
 			echo "<th>Date & Time</th>" ; 
 			echo "<th>Sensor</th>" ; 
-			echo "<th>Event</th>" ; 
+			echo "<th>Activity</th>" ; 
+			echo "<th>Moist Level</th>" ;
+			echo "<th>Light Level</th>" ;
 			echo "</tr>" ; 
 			echo "</thead>" ; 
 			echo "<tfoot>" ; 
 			echo "<tr>" ; 
 			echo "<th>Date & Time</th>" ; 
 			echo "<th>Sensor</th>" ; 
-			echo "<th>Event</th>" ; 
+			echo "<th>Activity</th>" ; 
+			echo "<th>Moist Level</th>" ;
+			echo "<th>Light Level</th>" ;
 			echo "</tr>" ; 
 			echo "</tfoot>" ;
 			echo "<tbody>" ;	
@@ -126,8 +130,8 @@
 			//table content LOOP BEGINS here
 			while($row = mysqli_fetch_assoc($result))
 			{
-			   $record=sprintf("<tr><td>%s</td><td>%s</td><td>%s</td></tr>\n", 
-					   $row["datetime"], $row["sensorname"], $row["activity"]); 
+			   $record=sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n", 
+					   $row["datetime"], $row["sensorname"], $row["activity"], $row["moisturelevel"], $row["lightlevel"]); 
 			   echo $record;
 			}
 			
