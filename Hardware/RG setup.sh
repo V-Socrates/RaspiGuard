@@ -1,0 +1,2 @@
+#!/bin/bash
+cd ~ && sudo apt-get -y update && sudo apt-get -y upgrade && wget https://raw.githubusercontent.com/adafruit/Adafruit-PiTFT-Helper/master/adafruit-pitft-helper2.sh && sudo apt-get install -y build-essential python-dev python-smbus python-pip python-mysqldb && git clone https://github.com/adafruit/Adafruit_Python_ADS1x15.git && sudo python setup.py install && cd ~ && sudo rm -r Adafruit_Python_ADS1x15 adafruit-pitft-helper2.sh && wget https://raw.githubusercontent.com/V-Socrates/RaspiGuard/master/Hardware/RG.py
